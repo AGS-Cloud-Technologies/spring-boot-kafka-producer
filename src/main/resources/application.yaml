@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Kafka Producer Service
+  profiles:
+    active: "@spring.profiles.active@"
+
+kafka:
+  producer:
+    bootstrap-servers: localhost:9092
+    topic: my-topic
