@@ -1,3 +1,33 @@
+spring:
+  application:
+    name: Kafka Producer Service - DEV
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      acks: 1
+      retries: 1
+      properties:
+        enable.idempotence: false
+        compression.type: snappy
+
 kafka:
   producer:
-    bootstrap-servers: dev-kafka:9092
+    bootstrap-servers: localhost:9092
+    topic: my-topic
+    partitions: 1
+    replication-factor: 1
+    acks: 1
+    retries: 1
+    batch-size: 16384
+    linger-ms: 10
+    buffer-memory: 33554432
+
+logging:
+  level:
+    root: INFO
+    com.agstech.kafka: DEBUG
+    org.springframework.kafka: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

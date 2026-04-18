@@ -1,3 +1,33 @@
+spring:
+  application:
+    name: Kafka Producer Service - STAGE
+  kafka:
+    bootstrap-servers: stage-kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        compression.type: snappy
+
 kafka:
   producer:
     bootstrap-servers: stage-kafka:9092
+    topic: my-topic
+    partitions: 3
+    replication-factor: 2
+    acks: all
+    retries: 3
+    batch-size: 32768
+    linger-ms: 10
+    buffer-memory: 67108864
+
+logging:
+  level:
+    root: INFO
+    com.agstech.kafka: INFO
+    org.springframework.kafka: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
